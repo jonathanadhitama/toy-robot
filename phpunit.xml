@@ -1,0 +1,10 @@
+<phpunit>
+    <testsuites>
+        <testsuite name="RobotTest">
+            <file>tests/RobotTest.php</file>
+        </testsuite>
+        <testsuite name="RunnerTest">
+            <file>tests/RunnerTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
