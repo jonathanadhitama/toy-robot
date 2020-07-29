@@ -2,6 +2,11 @@
 require_once "src/Runner.php";
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class RunnerTest
+ *
+ * Class used for Unit Testing Robot Class
+ */
 class RunnerTest extends TestCase
 {
     /**
@@ -38,8 +43,7 @@ class RunnerTest extends TestCase
     }
 
     /**
-     * Test Runner Class with an invalid simulated argv
-     * where the command input file does not exist
+     * Test Runner Class with an invalid simulated argv where the command input file does not exist
      * @test
      */
     public function testRunFileNotFound() {
@@ -48,8 +52,7 @@ class RunnerTest extends TestCase
     }
 
     /**
-     * Test Runner Class with an invalid simulated argv
-     * where the command input file does not exist
+     * Test Runner Class with an valid simulated argv but the command input file contains an invalid command
      * @test
      */
     public function testRunInvalidCommand() {

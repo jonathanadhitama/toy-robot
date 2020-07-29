@@ -2,8 +2,16 @@
 require_once "src/Robot.php";
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class RobotTest
+ *
+ * Class used for Unit Testing Robot Class
+ */
 class RobotTest extends TestCase
 {
+    /**
+     * @var Robot
+     */
     private $robot;
     public function setUp(): void
     {
@@ -11,6 +19,7 @@ class RobotTest extends TestCase
         $this->robot = new Robot();
         $this->robot->place(0,0, "NORTH");
     }
+
     /**
      * Test Base Case for robot in initial phase
      * @test
