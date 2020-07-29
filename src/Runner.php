@@ -4,6 +4,8 @@ require_once "CommandFileNotFoundException.php";
 
 /**
  * Class Runner
+ *
+ * Main application class that reads and executes the received robot commands from the provided command text file
  */
 class Runner {
     /**
