@@ -25,7 +25,7 @@ class Robot {
     /**
      * Index to determine which new direction to face when turning left
      * based on the robot's current facing direction
-     * @var array[]
+     * @var array
      */
     private const LEFT_INDEX = [
         'NORTH' => 'WEST',
@@ -36,7 +36,7 @@ class Robot {
     /**
      * Index to determine which new direction to face when turning right
      * based on the robot's current facing direction
-     * @var array[]
+     * @var array
      */
     private const RIGHT_INDEX = [
         'NORTH' => 'EAST',
@@ -48,7 +48,7 @@ class Robot {
     /**
      * Index to determine which coordinate (x or y) the robot should move when a MOVE command is issued by a
      * specified value based on the robot's current facing direction
-     * @var array[]
+     * @var array
      */
     private const MOVE_INDEX = [
         'NORTH' => ['which' => 'y', 'value' => 1],
@@ -81,6 +81,13 @@ class Robot {
      */
     private const MAX_Y = 5;
 
+
+    /**
+     * Constant array of valid directions for validation purposes
+     * @var array
+     */
+    private const VALID_DIRECTIONS = ["NORTH", "SOUTH", "WEST", "EAST"];
+
     /**
      * A function to check whether the provided coordinate exists on the table
      * @param int $x
@@ -98,6 +105,14 @@ class Robot {
     }
 
     /**
+     * @param string $f
+     * @return bool
+     */
+    private function isValidDirection (string $f) {
+        return in_array($f, self::VALID_DIRECTIONS);
+    }
+
+    /**
      * A function to simulate the PLACE command, to place the robot on a different coordinate on the table
      * @param int $x
      * @param int $y
@@ -105,7 +120,8 @@ class Robot {
      * @return void
      */
     public function place(int $x, int $y, string $f) {
-        if ($this->isValidCoordinate($x, $y)) {
+        //Check for valid coordinate and direction
+        if ($this->isValidCoordinate($x, $y) && $this->isValidDirection($f)) {
             $this->x = $x;
             $this->y = $y;
             $this->f = $f;
@@ -117,7 +133,8 @@ class Robot {
      * @return void
      */
     public function move() {
-        if (array_key_exists($this->f, self::MOVE_INDEX)) {
+        //Robot can only be moved once placed on the table
+        if (!is_null($this->x) && !is_null($this->y) && array_key_exists($this->f, self::MOVE_INDEX)) {
             $direction = self::MOVE_INDEX[$this->f];
             if ($direction['which'] === 'x') {
                 $newX = $this->x + $direction['value'];
@@ -162,8 +179,6 @@ class Robot {
     public function report() {
         if (!is_null($this->x) && !is_null($this->y) && !is_null($this->f)) {
             echo "$this->x,$this->y,$this->f\n";
-        } else {
-            echo "Robot is in invalid position currently.\n";
         }
     }
 }

@@ -26,7 +26,7 @@ class RobotTest extends TestCase
      */
     public function testBaseCase() {
         $robot = new Robot();
-        $this->expectOutputString("Robot is in invalid position currently.\n");
+        $this->expectOutputString("");
         $robot->report();
     }
 
@@ -45,6 +45,16 @@ class RobotTest extends TestCase
      */
     public function testPlaceInvalid() {
         $this->robot->place(10,10, "NORTH");
+        $this->expectOutputString("0,0,NORTH\n");
+        $this->robot->report();
+    }
+
+    /**
+     * Test Place Invalid Direction
+     * @test
+     */
+    public function testDirectionInvalid() {
+        $this->robot->place(1,1, "EAS");
         $this->expectOutputString("0,0,NORTH\n");
         $this->robot->report();
     }
